@@ -12,17 +12,13 @@ exports[`AppFactory snapshot tests KubeLambdaSSM-DockerImageStack 1`] = `
             {
               "Ref": "AWS::Partition",
             },
-            ":ecr:",
-            {
-              "Ref": "AWS::Region",
-            },
-            ":",
+            ":ecr:ap-southeast-2:",
             {
               "Ref": "AWS::AccountId",
             },
             ":repository/",
             {
-              "Fn::Sub": "cdk-hnb659fds-container-assets-\${AWS::AccountId}-\${AWS::Region}",
+              "Fn::Sub": "cdk-hnb659fds-container-assets-\${AWS::AccountId}-ap-southeast-2",
             },
           ],
         ],
@@ -92,19 +88,15 @@ exports[`AppFactory snapshot tests KubeLambdaSSM-LambdaSSMStack 1`] = `
                 {
                   "Ref": "AWS::AccountId",
                 },
-                ".dkr.ecr.",
-                {
-                  "Ref": "AWS::Region",
-                },
-                ".",
+                ".dkr.ecr.ap-southeast-2.",
                 {
                   "Ref": "AWS::URLSuffix",
                 },
                 "/",
                 {
-                  "Fn::Sub": "cdk-hnb659fds-container-assets-\${AWS::AccountId}-\${AWS::Region}",
+                  "Fn::Sub": "cdk-hnb659fds-container-assets-\${AWS::AccountId}-ap-southeast-2",
                 },
-                ":latest",
+                ":ba0b80eec0dbe6f06690d3608f452297ddb88bd0f7fd49277615b3f8421951a5",
               ],
             ],
           },
@@ -252,7 +244,7 @@ exports[`AppFactory snapshot tests KubeLambdaSSM-LambdaSSMStack 1`] = `
       "Properties": {
         "Code": {
           "S3Bucket": {
-            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-ap-southeast-2",
           },
           "S3Key": "5fa1330271b8967d9254ba2d4a07144f8acefe8b77e6d6bba38261373a50d5f8.zip",
         },

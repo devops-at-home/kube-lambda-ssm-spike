@@ -9,6 +9,7 @@ interface LambdaSSMStackProps extends StackProps, LambdaSSMStackConfig {}
 
 export type LambdaSSMStackConfig = {
     repository: IRepository;
+    imageTag: string;
 };
 
 const { ACCOUNT_ID, REGION } = Aws;
@@ -17,8 +18,12 @@ export class LambdaSSMStack extends Stack {
     constructor(scope: Construct, id: string, props: LambdaSSMStackProps) {
         super(scope, id, props);
 
+        const { repository, imageTag } = props;
+
         const { role } = new Function(this, 'KubeLambda', {
-            code: DockerImageCode.fromEcr(props.repository)._bind(),
+            code: DockerImageCode.fromEcr(repository, {
+                tagOrDigest: imageTag,
+            })._bind(),
             handler: Handler.FROM_IMAGE,
             runtime: Runtime.FROM_IMAGE,
             architecture: Architecture.X86_64,

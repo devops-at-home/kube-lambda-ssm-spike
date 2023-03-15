@@ -23,9 +23,13 @@ export const appFactory = (app: App, props: AppFactoryProps) => {
         });
     }
 
-    const { repository } = new DockerImageStack(app, `${stackPrefix}-DockerImageStack`, {});
+    const { repository, imageTag } = new DockerImageStack(app, `${stackPrefix}-DockerImageStack`, {
+        ...stackProps,
+    });
 
     new LambdaSSMStack(app, `${stackPrefix}-LambdaSSMStack`, {
+        ...stackProps,
         repository,
+        imageTag,
     });
 };
