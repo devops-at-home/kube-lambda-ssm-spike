@@ -1,4 +1,4 @@
-import { Stack, StackProps } from 'aws-cdk-lib';
+import { Aws, Stack, StackProps } from 'aws-cdk-lib';
 import { IRepository } from 'aws-cdk-lib/aws-ecr';
 import { Policy, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { Architecture, DockerImageCode, Function, Handler, Runtime } from 'aws-cdk-lib/aws-lambda';
@@ -11,14 +11,14 @@ export type LambdaSSMStackConfig = {
     repository: IRepository;
 };
 
+const { ACCOUNT_ID, REGION } = Aws;
+
 export class LambdaSSMStack extends Stack {
     constructor(scope: Construct, id: string, props: LambdaSSMStackProps) {
         super(scope, id, props);
 
         const { role } = new Function(this, 'KubeLambda', {
-            code: DockerImageCode.fromEcr(props.repository, {
-                entrypoint: ['kubectl', 'get', 'svc,deployment', '--all-namespaces'],
-            })._bind(),
+            code: DockerImageCode.fromEcr(props.repository)._bind(),
             handler: Handler.FROM_IMAGE,
             runtime: Runtime.FROM_IMAGE,
             architecture: Architecture.X86_64,
@@ -28,10 +28,22 @@ export class LambdaSSMStack extends Stack {
             },
         });
 
-        // TODO: fine tune this
         role?.attachInlinePolicy(
             new Policy(this, 'LambdaSSMPermissions', {
-                statements: [new PolicyStatement({ actions: ['ssm:*'] })],
+                statements: [
+                    new PolicyStatement({ actions: ['ssm:*Session'], resources: ['*'] }),
+                    new PolicyStatement({ actions: ['ssm:DescribeParameters'], resources: ['*'] }),
+                    new PolicyStatement({
+                        actions: ['ssm:GetParameters'],
+                        resources: [`arn:aws:ssm:${REGION}:${ACCOUNT_ID}:parameter/KUBECONFIG`],
+                    }),
+                    new PolicyStatement({
+                        actions: ['kms:Decrypt'],
+                        resources: [
+                            `arn:aws:kms:${REGION}:${ACCOUNT_ID}:key/149bd7e6-b504-4688-b693-9dfbfe95bf37`,
+                        ],
+                    }),
+                ],
             })
         );
     }

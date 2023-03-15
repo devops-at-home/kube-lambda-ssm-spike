@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# Get kubeconfig from SSM Parameter Store
+aws ssm get-parameters \
+  --names KUBECONFIG \
+  --with-decryption \
+  --output text \
+  > $KUBECONFIG
+
+# Lookup Instance ID
+INSTANCE_ID=$(aws ec2 describe-instances \
+  --filter "Name=tag:project,Values=kube-lambda-ssm-spike" \
+  --query "Reservations[].Instances[?State.Name == 'running'].InstanceId[]" \
+  --output text)
+
+# Start port forward
+aws ssm start-session \
+    --target $INSTANCE_ID \
+    --document-name AWS-StartPortForwardingSession \
+    --parameters '{"portNumber":["6443"],"localPortNumber":["6443"]}' &
+
+# Run kubectl commands
+kubectl get svc,deployment --all-namespaces
