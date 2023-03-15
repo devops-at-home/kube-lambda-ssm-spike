@@ -4,7 +4,7 @@ exports[`AppFactory snapshot tests KubeLambdaSSM-DockerImageStack 1`] = `
 {
   "Outputs": {
     "ImageTag": {
-      "Value": "fcdb402f8653b6076faeb2c3125fa6ad0e7b4400d3661d55ee290d548e638c9f",
+      "Value": "11a7951562a4a5dad9067a6e1bc9191f304a5c571db091d9bd2422dbd5488060",
     },
     "RepositoryArn": {
       "Value": {
@@ -99,7 +99,7 @@ exports[`AppFactory snapshot tests KubeLambdaSSM-LambdaSSMStack 1`] = `
                 {
                   "Fn::Sub": "cdk-hnb659fds-container-assets-\${AWS::AccountId}-ap-southeast-2",
                 },
-                ":fcdb402f8653b6076faeb2c3125fa6ad0e7b4400d3661d55ee290d548e638c9f",
+                ":11a7951562a4a5dad9067a6e1bc9191f304a5c571db091d9bd2422dbd5488060",
               ],
             ],
           },
