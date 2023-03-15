@@ -15,7 +15,7 @@ export class DockerImageStack extends Stack {
 
         const { repository } = new DockerImageAsset(this, 'LambdaImage', {
             directory: join(__dirname, '..', 'docker'),
-            platform: Platform.LINUX_ARM64,
+            platform: Platform.LINUX_AMD64,
         });
 
         this.repository = repository;

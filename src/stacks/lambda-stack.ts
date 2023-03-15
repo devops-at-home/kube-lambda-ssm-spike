@@ -21,7 +21,7 @@ export class LambdaSSMStack extends Stack {
             })._bind(),
             handler: Handler.FROM_IMAGE,
             runtime: Runtime.FROM_IMAGE,
-            architecture: Architecture.ARM_64,
+            architecture: Architecture.X86_64,
             logRetention: RetentionDays.ONE_WEEK,
             environment: {
                 KUBECONFIG: '/tmp/k3s.yaml',
