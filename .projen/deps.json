@@ -1,6 +1,10 @@
 {
   "dependencies": [
     {
+      "name": "@types/aws-lambda",
+      "type": "build"
+    },
+    {
       "name": "@types/jest",
       "type": "build"
     },
@@ -41,6 +45,11 @@
       "type": "build"
     },
     {
+      "name": "standard-version",
+      "version": "^9",
+      "type": "build"
+    },
+    {
       "name": "ts-jest",
       "type": "build"
     },
@@ -51,6 +60,10 @@
     {
       "name": "typescript",
       "type": "build"
+    },
+    {
+      "name": "aws-cdk-github-oidc",
+      "type": "runtime"
     },
     {
       "name": "aws-cdk-lib",
