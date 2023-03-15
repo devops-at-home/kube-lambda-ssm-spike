@@ -21,5 +21,9 @@ export class DockerImageStack extends Stack {
         new CfnOutput(this, 'RepositoryArn', {
             value: repository.repositoryArn,
         });
+
+        new CfnOutput(this, 'ImageTag', {
+            value: imageTag,
+        });
     }
 }

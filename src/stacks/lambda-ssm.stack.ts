@@ -36,6 +36,10 @@ export class LambdaSSMStack extends Stack {
         role?.attachInlinePolicy(
             new Policy(this, 'LambdaSSMPermissions', {
                 statements: [
+                    new PolicyStatement({
+                        actions: ['ssm:DescribeInstanceInformation'],
+                        resources: ['*'],
+                    }),
                     new PolicyStatement({ actions: ['ssm:*Session'], resources: ['*'] }),
                     new PolicyStatement({ actions: ['ssm:DescribeParameters'], resources: ['*'] }),
                     new PolicyStatement({

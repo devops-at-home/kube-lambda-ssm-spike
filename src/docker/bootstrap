@@ -5,13 +5,15 @@ aws ssm get-parameters \
   --names KUBECONFIG \
   --with-decryption \
   --output text \
-  > $KUBECONFIG
+  | base64 -d > $KUBECONFIG
 
 # Lookup Instance ID
-INSTANCE_ID=$(aws ec2 describe-instances \
-  --filter "Name=tag:project,Values=kube-lambda-ssm-spike" \
-  --query "Reservations[].Instances[?State.Name == 'running'].InstanceId[]" \
-  --output text)
+INSTANCE_ID=$(aws ssm describe-instance-information \
+    --filter "Key=tag:project,Values=kube-lambda-ssm-spike" \
+    --query "InstanceInformationList[].InstanceId[]" \
+    --output text)
+
+echo "Instance ID is: $INSTANCE_ID, starting port forward session"
 
 # Start port forward
 aws ssm start-session \

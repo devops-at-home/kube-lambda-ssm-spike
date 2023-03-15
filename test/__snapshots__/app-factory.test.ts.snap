@@ -3,6 +3,9 @@
 exports[`AppFactory snapshot tests KubeLambdaSSM-DockerImageStack 1`] = `
 {
   "Outputs": {
+    "ImageTag": {
+      "Value": "fcdb402f8653b6076faeb2c3125fa6ad0e7b4400d3661d55ee290d548e638c9f",
+    },
     "RepositoryArn": {
       "Value": {
         "Fn::Join": [
@@ -96,7 +99,7 @@ exports[`AppFactory snapshot tests KubeLambdaSSM-LambdaSSMStack 1`] = `
                 {
                   "Fn::Sub": "cdk-hnb659fds-container-assets-\${AWS::AccountId}-ap-southeast-2",
                 },
-                ":ba0b80eec0dbe6f06690d3608f452297ddb88bd0f7fd49277615b3f8421951a5",
+                ":fcdb402f8653b6076faeb2c3125fa6ad0e7b4400d3661d55ee290d548e638c9f",
               ],
             ],
           },
@@ -174,6 +177,11 @@ exports[`AppFactory snapshot tests KubeLambdaSSM-LambdaSSMStack 1`] = `
       "Properties": {
         "PolicyDocument": {
           "Statement": [
+            {
+              "Action": "ssm:DescribeInstanceInformation",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
             {
               "Action": "ssm:*Session",
               "Effect": "Allow",
