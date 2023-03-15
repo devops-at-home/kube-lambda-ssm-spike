@@ -4,6 +4,7 @@
     "build": "npx projen build",
     "bump": "npx projen bump",
     "bundle": "npx projen bundle",
+    "cdk-deploy-test": "npx projen cdk-deploy-test",
     "clobber": "npx projen clobber",
     "compile": "npx projen compile",
     "default": "npx projen default",

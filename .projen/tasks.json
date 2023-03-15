@@ -45,6 +45,14 @@
       "name": "bundle",
       "description": "Prepare assets"
     },
+    "cdk-deploy-test": {
+      "name": "cdk-deploy-test",
+      "steps": [
+        {
+          "exec": "cdk deploy --ci --require-approval never --progress events KubeLambdaSSM-*"
+        }
+      ]
+    },
     "clobber": {
       "name": "clobber",
       "description": "hard resets to HEAD of origin and cleans the local repo",
