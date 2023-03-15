@@ -1,23 +1,13 @@
-import { App, Stack, StackProps } from 'aws-cdk-lib';
-import { Construct } from 'constructs';
-
-export class MyStack extends Stack {
-  constructor(scope: Construct, id: string, props: StackProps = {}) {
-    super(scope, id, props);
-
-    // define resources here...
-  }
-}
-
-// for development, use account/region from cdk cli
-const devEnv = {
-  account: process.env.CDK_DEFAULT_ACCOUNT,
-  region: process.env.CDK_DEFAULT_REGION,
-};
+import { App } from 'aws-cdk-lib';
+import { appFactory } from './app-factory';
+import { config } from './config';
 
 const app = new App();
 
-new MyStack(app, 'kube-lambda-ssm-spike-dev', { env: devEnv });
-// new MyStack(app, 'kube-lambda-ssm-spike-prod', { env: prodEnv });
+const appFactoryProps = config();
+
+appFactoryProps.forEach((props) => {
+    appFactory(app, props);
+});
 
 app.synth();
