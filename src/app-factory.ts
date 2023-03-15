@@ -1,4 +1,6 @@
 import { App, StackProps } from 'aws-cdk-lib';
+import { DockerImageStack } from './stacks/docker-image-stack';
+// import { LambdaSSMStack } from './stacks/lambda-stack';
 import { OIDCStack } from './stacks/oidc.stack';
 import { AppFactoryProps } from './types';
 
@@ -20,4 +22,11 @@ export const appFactory = (app: App, props: AppFactoryProps) => {
             ...props.oidcConfig,
         });
     }
+
+    // const { repository } =
+    new DockerImageStack(app, `${stackPrefix}-DockerImageStack`, {});
+
+    // new LambdaSSMStack(app, `${stackPrefix}-LambdaSSMStack`, {
+    //     repository,
+    // });
 };
