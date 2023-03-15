@@ -2,10 +2,11 @@
 
 # Get kubeconfig from SSM Parameter Store
 aws ssm get-parameters \
-  --names KUBECONFIG \
-  --with-decryption \
-  --output text \
-  | base64 -d > $KUBECONFIG
+    --names KUBECONFIG \
+    --with-decryption \
+    --query "Parameters[].Value" \
+    --output text \
+    > $KUBECONFIG
 
 # Lookup Instance ID
 INSTANCE_ID=$(aws ssm describe-instance-information \
