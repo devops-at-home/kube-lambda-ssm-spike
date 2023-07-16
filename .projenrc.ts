@@ -4,7 +4,7 @@ import { JobPermission } from 'projen/lib/github/workflows-model';
 const authorName = 'DevOps@Home';
 
 const project = new awscdk.AwsCdkTypeScriptApp({
-    cdkVersion: '2.69.0',
+    cdkVersion: '2.87.0',
     authorName,
     authorUrl: 'https://devops-at-ho.me',
     copyrightOwner: authorName,
@@ -48,7 +48,7 @@ project.release?.addJobs({
             {
                 name: 'Setup node',
                 uses: 'actions/setup-node@v3',
-                with: { 'node-version': '14.x' },
+                with: { 'node-version': '16.x' },
             },
             {
                 name: 'Download build artifacts',
