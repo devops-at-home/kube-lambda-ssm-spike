@@ -254,7 +254,7 @@ exports[`AppFactory snapshot tests KubeLambdaSSM-LambdaSSMStack 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-ap-southeast-2",
           },
-          "S3Key": "5fa1330271b8967d9254ba2d4a07144f8acefe8b77e6d6bba38261373a50d5f8.zip",
+          "S3Key": "5cc92ed0cea39e2b8de2dbc527dfb5980a3af9564bd1084d840b9787c7d0467e.zip",
         },
         "Handler": "index.handler",
         "Role": {
@@ -263,7 +263,7 @@ exports[`AppFactory snapshot tests KubeLambdaSSM-LambdaSSMStack 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs16.x",
+        "Runtime": "nodejs18.x",
       },
       "Type": "AWS::Lambda::Function",
     },
