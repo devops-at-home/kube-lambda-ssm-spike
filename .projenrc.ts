@@ -4,7 +4,7 @@ import { JobPermission } from 'projen/lib/github/workflows-model';
 const authorName = 'DevOps@Home';
 
 const project = new awscdk.AwsCdkTypeScriptApp({
-    cdkVersion: '2.87.0',
+    cdkVersion: '2.94.0',
     authorName,
     authorUrl: 'https://devops-at-ho.me',
     copyrightOwner: authorName,
